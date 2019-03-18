@@ -30,7 +30,7 @@ inline int binary_search(int key){
 
 int main(int argc, const char * argv[]) {
     //если у нас нечётное число аргументов - error
-    if (argc % 3 != 0)
+    if (argc == 1 || !(argc % 2))
         return -1;
     
     unsigned int result = 0;
