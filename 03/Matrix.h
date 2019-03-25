@@ -27,13 +27,13 @@ public:
         //---------------------overload_[]---------------------//
         int operator [] (unsigned int columns) const{
             if (columns >= this->columns)
-            throw std::out_of_range("Outside size matrix");
+                throw std::out_of_range("Outside size matrix");
             
             return data[columns];
         }
         int & operator [] (unsigned int columns){
             if (columns >= this->columns)
-            throw std::out_of_range("Outside size matrix");
+                throw std::out_of_range("Outside size matrix");
             
             return data[columns];
         }
@@ -43,7 +43,7 @@ public:
             for (int i = 0; i != columns; i++){
                 
                 if (data[i] != object.data[i])
-                return false;
+                    return false;
             }
             
             return true;
@@ -59,7 +59,7 @@ public:
                 data[i] *= number;
             }
             else
-            throw std::out_of_range("Empty Matrix");
+                throw std::out_of_range("Empty Matrix");
             return *this;
         }
 
@@ -85,13 +85,13 @@ public:
     //---------------------overload_[]---------------------//
     const SubMatrix & operator [] (unsigned int rows) const{
         if (rows >= this->rows)
-        throw std::out_of_range("Outside size matrix");
+            throw std::out_of_range("Outside size matrix");
         
         return base[rows];
     }
     SubMatrix & operator [] (unsigned int rows){
         if (rows >= this->rows)
-        throw std::out_of_range("Outside size matrix");
+            throw std::out_of_range("Outside size matrix");
         
         return base[rows];
     }
@@ -106,7 +106,7 @@ public:
             return true;
         }
         else
-        return false;
+            return false;
     }
     bool operator != (const Matrix & object) const {
         return (!(*this == object));
