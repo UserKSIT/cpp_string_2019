@@ -108,7 +108,7 @@ public:
     }
     
  
-    Matrix & operator *= (const int & number){
+    Matrix & operator *= (const int number){
         if (!base.empty()){
             for (int i = 0; i != rows; i++)
             base[i] *= number;
