@@ -46,7 +46,7 @@ public:
         }
         
         
-        SubMatrix & operator *= (const int number){
+        SubMatrix & operator *= (int number){
             if (!data.empty()){
                 for (int i = 0; i != columns; i++)
                     data[i] *= number;
@@ -108,7 +108,7 @@ public:
     }
     
  
-    Matrix & operator *= (const int number){
+    Matrix & operator *= (int number){
         if (!base.empty()){
             for (int i = 0; i != rows; i++)
                 base[i] *= number;
