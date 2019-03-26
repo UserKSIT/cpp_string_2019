@@ -49,7 +49,7 @@ public:
         SubMatrix & operator *= (const int number){
             if (!data.empty()){
                 for (int i = 0; i != columns; i++)
-                data[i] *= number;
+                    data[i] *= number;
             }
             else
                 throw std::out_of_range("Empty Matrix");
@@ -88,7 +88,7 @@ public:
         if (rows == object.rows && columns == object.columns){
             for (int i = 0; i != rows; i++){
                 if (!(base[i] == object.base[i]))
-                return false;
+                    return false;
             }
             return true;
         }
@@ -111,7 +111,7 @@ public:
     Matrix & operator *= (const int number){
         if (!base.empty()){
             for (int i = 0; i != rows; i++)
-            base[i] *= number;
+                base[i] *= number;
         }
         else
             throw std::out_of_range("Empty Matrix");
