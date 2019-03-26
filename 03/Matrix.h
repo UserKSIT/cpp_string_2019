@@ -13,32 +13,25 @@
 class Matrix{
 public:
     class SubMatrix{
-    public:
-        //----------------Interface_SubMatrix----------------//
-        
-        //---------------------Constructor_SubMatrix---------------------//
-        SubMatrix(unsigned int columns = 0): columns(columns){
-            data = std::vector<int>(columns);
-        }
+    public:     
+        SubMatrix(size_t columns = 0): columns(columns), data(std::vector<int>(columns)){}
         ~SubMatrix(){}
         
-//        friend std::ostream & operator << (std::ostream &, const SubMatrix &);
-        
-        //---------------------overload_[]---------------------//
-        int operator [] (unsigned int columns) const{
+
+        int operator [] (size_t columns) const{
             if (columns >= this->columns)
                 throw std::out_of_range("Outside size matrix");
             
             return data[columns];
         }
-        int & operator [] (unsigned int columns){
+        int & operator [] (size_t columns){
             if (columns >= this->columns)
                 throw std::out_of_range("Outside size matrix");
             
             return data[columns];
         }
         
-        //---------------------overload_==_and_!=---------------------//
+        
         bool operator == (const SubMatrix & object) const{
             for (int i = 0; i != columns; i++){
                 
@@ -52,8 +45,8 @@ public:
             return !(*this == object);
         }
         
-        //---------------------overload_*=---------------------//
-        SubMatrix & operator *= (int number){
+        
+        SubMatrix & operator *= (const int number){
             if (!data.empty()){
                 for (int i = 0; i != columns; i++)
                 data[i] *= number;
@@ -65,38 +58,32 @@ public:
 
         
     private:
-        //----------------State_SubMatrix----------------//
+        size_t columns;
         std::vector<int> data;
-        unsigned int columns;
     };
-    //----------------Interface_Matrix----------------//
-    
-    //---------------------Constructor_Matrix---------------------//
-    Matrix(unsigned int rows = 0, unsigned int columns = 0): rows(rows), columns(columns){
-        base = std::vector<SubMatrix>(rows);
-        
-        for (unsigned int i = 0; i != rows; i++)
+
+
+    Matrix(size_t rows = 0, size_t columns = 0): rows(rows), columns(columns), base(std::vector<SubMatrix>(rows)){
+        for (size_t i = 0; i != rows; i++)
             base[i] = SubMatrix(columns);
     }
     ~Matrix(){}
     
-//    friend std::ostream & operator << (std::ostream &, const Matrix &);
-    
-    //---------------------overload_[]---------------------//
-    const SubMatrix & operator [] (unsigned int rows) const{
+
+    const SubMatrix & operator [] (size_t rows) const{
         if (rows >= this->rows)
             throw std::out_of_range("Outside size matrix");
         
         return base[rows];
     }
-    SubMatrix & operator [] (unsigned int rows){
+    SubMatrix & operator [] (size_t rows){
         if (rows >= this->rows)
             throw std::out_of_range("Outside size matrix");
         
         return base[rows];
     }
     
-    //---------------------overload_==_and_!=---------------------//
+
     bool operator == (const Matrix & object) const {
         if (rows == object.rows && columns == object.columns){
             for (int i = 0; i != rows; i++){
@@ -112,16 +99,16 @@ public:
         return (!(*this == object));
     }
     
-    //---------------------get_function---------------------//
-    unsigned int getRows() const {
+ 
+    size_t getRows() const {
         return rows;
     }
-    unsigned int getColumns() const {
+    size_t getColumns() const {
         return columns;
     }
     
-    //---------------------overload_*=---------------------//
-    Matrix & operator *= (int number){
+ 
+    Matrix & operator *= (const int & number){
         if (!base.empty()){
             for (int i = 0; i != rows; i++)
             base[i] *= number;
@@ -132,27 +119,7 @@ public:
     }
     
 private:
-    //----------------State_Matrix----------------//
-    unsigned int columns;
-    unsigned int rows;
+    size_t rows;
+    size_t columns;
     std::vector<SubMatrix>  base;
 };
-
-
-
-//---------------------------Output_in_stream---------------------------//
-//std::ostream & operator << (std::ostream & flow, const Matrix & object){
-//    for (int i = 0; i != object.rows; i++)
-//        flow << object.base[i];
-//
-//    return flow;
-//}
-//
-//std::ostream & operator << (std::ostream & flow, const Matrix::SubMatrix & object){
-//    for (const auto current_columns : object.data)
-//        flow << current_columns << "    ";
-//
-//    flow << std::endl;
-//
-//    return flow;
-//}
