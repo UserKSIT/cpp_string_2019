@@ -13,28 +13,28 @@ class BigInt{
 public:
 	BigInt(long long number = 0): size(1), range(size + 101), sign(1), value(new int[range])
 	{
-    	if (number < 0) 
+    		if (number < 0) 
 		{
-        	sign = -1;
-        	number = abs(number);
-    	} 
+        		sign = -1;
+        		number = abs(number);
+    		} 
 
 
-        size_t i = 0;
-        if (number != 0)
-        {
+        	size_t i = 0;
+        	if (number != 0)
+        	{
 			while(number)
 			{
 				value[i] = static_cast<int>(number % base);
 				number /= base;
 				i++;
 			}
-        	size = i;
-        }
+        		size = i;
+        	}
 
             
-    	for (size_t cleaning = i; cleaning != range; cleaning++)
-        	value[cleaning] = 0;
+    		for (size_t cleaning = i; cleaning != range; cleaning++)
+        		value[cleaning] = 0;
        
 	}
 
@@ -93,24 +93,25 @@ public:
 
 	BigInt & operator += (const BigInt & addend)
 	{
-        if (addend.size > range)
-        {
-    		int* new_ptr_value = new int[addend.size + 100];
+        	if (addend.size > range)
+        	{
+    			int* new_ptr_value = new int[addend.size + 100];
 
-            std::copy(value, value + range, new_ptr_value);
-            delete [] value;
-            value = new_ptr_value;
+			std::copy(value, value + range, new_ptr_value);
+			delete [] value;
+			value = new_ptr_value;
 
-            range = addend.size + 100;
-            for(size_t i = size; i != range; i++)
-                value[i] = 0;
-        }
+			range = addend.size + 100;
+			for(size_t i = size; i != range; i++)
+                		value[i] = 0;
+        	}
 
 
 		size_t it1 = 0, it2 = 0;
 		int sum = 0;
         
-		while (it1 != size || it2 != addend.size) {
+		while (it1 != size || it2 != addend.size) 
+		{
 			if (it1 != size) 
 			{
 				sum += value[it1];
@@ -123,7 +124,7 @@ public:
             
 			if (it2 != addend.size) 
 			{
-	            sum += addend.value[it2++];
+	            		sum += addend.value[it2++];
 			}
             
 			value[it1] = sum % base;
@@ -156,42 +157,42 @@ public:
 	BigInt & operator -= (const BigInt & subtrahend)
 	{
 		size_t it1 = 0, it2 = 0;
-        int dif = 0;
+        	int dif = 0;
         
-    	while (it1 != size || it2 != subtrahend.size) 
-    	{
-	        if (it1 != size) 
-	        {
-	            dif += value[it1++];
-	        }
+		while (it1 != size || it2 != subtrahend.size) 
+		{
+			if (it1 != size) 
+			{
+			    dif += value[it1++];
+			}
 
-	        if (it2 != subtrahend.size) 
-	        {
-	            dif -= subtrahend.value[it2++];
-	        }
+			if (it2 != subtrahend.size) 
+			{
+			    dif -= subtrahend.value[it2++];
+			}
 
-	        if (dif < 0) 
-	        {
+			if (dif < 0) 
+			{
 				if (size > 1)
-	            	value[it1 - 1] = dif + base;
+					value[it1 - 1] = dif + base;
 				else
 					value[it1 - 1] = abs(dif);
-				
-	            dif = -1;
-	        } 
-	        else 
-	        {
-	            value[it1 - 1] = dif % base;
-	            dif /= base;
-	        }
-    	}
 
-    	if (dif < 0)
-    	 	sign *= -1;
-        if (size == 1 && value[0] == 0)
-            sign = 1;
+				dif = -1;
+			} 
+			else 
+			{
+			    value[it1 - 1] = dif % base;
+			    dif /= base;
+			}
+		}
 
-    	 return *this;
+		if (dif < 0)
+			sign *= -1;
+		if (size == 1 && value[0] == 0)
+			sign = 1;
+
+		return *this;
 	}
 
 	BigInt operator - (const BigInt & subtrahend) const
