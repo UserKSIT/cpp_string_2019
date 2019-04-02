@@ -44,6 +44,9 @@ int main(int argc, const char* argv[])
 
 BigInt x = 9223372036854775807;
 BigInt y = 9223372036854775807;
+    for (long long i = 0; i != 1000000000; i++)
+        x += y;
+    
 BigInt z = x + y;
     if (z == x + y)
     {
