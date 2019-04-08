@@ -31,7 +31,7 @@ public:
     template <class... ArgsT>
     Error operator()(ArgsT... args)
     {
-        return process(std::forward<ArgsT&>(args)...);
+        return process(std::forward<ArgsT>(args)...);
     }
     
     
@@ -49,7 +49,7 @@ private:
         return process(std::forward<ArgsT>(args)...);
     }
     
-    Error process(uint64_t & value)
+    Error process(uint64_t&& value)
     {
         out_ << value << Separator;
         return Error::NoError;
@@ -116,7 +116,7 @@ private:
         return Error::NoError;
     }
     
-    Error process(uint64_t & value)
+    Error process(uint64_t& value)
     {
         std::string text;
         in_ >> text;
