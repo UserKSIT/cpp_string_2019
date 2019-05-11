@@ -13,7 +13,7 @@
 
 
 constexpr size_t Mb = 1024*1024;
-constexpr size_t read_value = (8 * Mb - sizeof(std::thread) * 2);
+constexpr size_t read_value = (2 * Mb - sizeof(std::thread) * 2);
 constexpr size_t MAXSIZE = read_value / sizeof(uint64_t);
 
 using typeNumber = uint64_t;
