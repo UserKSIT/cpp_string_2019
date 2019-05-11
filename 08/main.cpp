@@ -44,7 +44,7 @@ void quick_sort(std::vector<typeNumber>& buffer_)
 
 bool writeFile(std::vector<typeNumber>& buffer_)
 {
-    std::string fileName = "/Users/artem/Desktop/Programing/Techoatom/C++/Thread_sort/Thread_sort/semi_result" + std::to_string(counter) + ".bin";
+    std::string fileName = "semi_result" + std::to_string(counter) + ".bin";
     std::ofstream file(fileName, std::ios::binary);
     
     if (!file)
@@ -81,7 +81,7 @@ bool fileMerge()
         file_1.open(name_1, std::ios::binary);
         file_2.open(name_2, std::ios::binary);
         
-        result_name = "/Users/artem/Desktop/Programing/Techoatom/C++/Thread_sort/Thread_sort/s_result" + std::to_string(counter) + ".bin";
+        result_name = "s_result" + std::to_string(counter) + ".bin";
         counter--;
         
         result_file.open(result_name, std::ios::binary);
@@ -157,7 +157,7 @@ int main()
 {
     std::vector<typeNumber> buffer_(MAXSIZE);
     
-    const char* fileName = "/Users/artem/Desktop/Programing/Techoatom/C++/Thread_sort/Thread_sort/data.bin";
+    const char* fileName = "data.bin";
     std::ifstream file(fileName, std::ios::binary);
     if (!file)
     {
