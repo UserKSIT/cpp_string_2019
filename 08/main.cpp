@@ -33,10 +33,10 @@ private:
         std::thread worker_1(&AsyncSort::sort_, buffer_.begin(), mid);
         std::thread worker_2(&AsyncSort::sort_, mid, buffer_.end());
         
-        std::inplace_merge(buffer_.begin(), mid, buffer_.end());
-        
         worker_1.join();
         worker_2.join();
+        
+        std::inplace_merge(buffer_.begin(), mid, buffer_.end());
         
         return;
     }
