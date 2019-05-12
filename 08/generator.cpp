@@ -9,13 +9,14 @@
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <limits>
 
 
-template <class T, size_t Max>
+template <class T>
 T getRandom()
 {
     static std::random_device device;
-    static std::uniform_int_distribution<T> dist(1, Max);
+    static std::uniform_int_distribution<T> dist(1);
     return dist(device);
 }
 
@@ -30,12 +31,13 @@ int main()
     }
     
     constexpr size_t N = 20;
-    uint64_t push = 0;
+    unsigned long long push = 0;
+
     for (size_t i = 0; i < N; ++i)
     {
-        push = getRandom<uint64_t,2000000000>();
-        //std::cout << push << std::endl;
-        file.write((char *)&push, sizeof(uint64_t));
+        push = getRandom<unsigned long long>();
+    
+        file.write(reinterpret_cast<char *>(&push), sizeof(unsigned long long));
     }
     
     return 0;
