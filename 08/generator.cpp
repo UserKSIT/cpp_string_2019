@@ -23,7 +23,7 @@ T getRandom()
 int main()
 {
     const char* fileName = "data.bin";
-    std::ofstream file(fileName, std::ios::binary | std::ios::out);
+    std::ofstream file(fileName, std::ios::binary);
     if (!file)
     {
         std::cerr << "Can't open " << fileName << '\n';
