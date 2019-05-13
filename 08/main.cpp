@@ -166,7 +166,7 @@ public:
         {
             for (size_t i = 0; i != MAXSIZE; i++)
             {
-                if (file.read(reinterpret_cast<char *>(&buffer_[i]), sizeof(uint64_t)).eof())
+                if (file.read(reinterpret_cast<char *>(&buffer_[i]), sizeof(typeNumber)).eof())
                 {
                     while(i != MAXSIZE)
                     {
