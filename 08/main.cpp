@@ -30,8 +30,8 @@ private:
         size_t shift = buffer_.size() / 2;
         std::advance(mid, shift);
         
-        std::thread worker_1(&AsyncSort::sort_, buffer_.begin(), mid);
-        std::thread worker_2(&AsyncSort::sort_, mid, buffer_.end());
+        std::thread worker_1(&AsyncSort::sort, buffer_.begin(), mid);
+        std::thread worker_2(&AsyncSort::sort, mid, buffer_.end());
         
         worker_1.join();
         worker_2.join();
@@ -181,13 +181,13 @@ public:
         fileMerge();
     }
     
-    static void sort_(std::vector<typeNumber>::iterator left, std::vector<typeNumber>::iterator right)
+    static void sort(std::vector<typeNumber>::iterator left, std::vector<typeNumber>::iterator right)
     {
         if (right - left <= 1)
             return;
     
         typeNumber mid = *(left + (right - left) / 2);
-        std::vector<typeNumber>::iterator yetLeft = left, yetRight = right - 1;
+        auto yetLeft = left, yetRight = right - 1;
     
         while (yetLeft <= yetRight)
         {
@@ -203,9 +203,9 @@ public:
         }
     
         if (left < yetRight)
-            sort_(left, yetRight + 1);
+            sort(left, yetRight + 1);
         if (yetLeft < right)
-            sort_(yetLeft, right);
+            sort(yetLeft, right);
     }
 };
 
